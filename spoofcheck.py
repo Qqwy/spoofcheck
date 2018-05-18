@@ -223,8 +223,10 @@ if __name__ == "__main__":
 
         if spoofable:
             output_good("Spoofing possible for " + domain + "!")
+            sys.exit(1)
         else:
             output_bad("Spoofing not possible for " + domain)
+            sys.exit(1)
 
     except IndexError:
         output_error("Usage: spoofcheck [DOMAIN]")
