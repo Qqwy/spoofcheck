@@ -207,6 +207,7 @@ def is_dmarc_record_strong(domain):
 
 
 if __name__ == "__main__":
+    import json
     color_init()
     spoofable = False
 
@@ -221,12 +222,15 @@ if __name__ == "__main__":
         else:
             spoofable = False
 
+        res_json =  json.dumps({'spf': spf_record_strength, 'dmarc': dmarc_record_strength})
+        print(res_json)
+
         if spoofable:
             output_good("Spoofing possible for " + domain + "!")
             sys.exit(1)
         else:
             output_bad("Spoofing not possible for " + domain)
-            sys.exit(1)
+            sys.exit(0)
 
     except IndexError:
         output_error("Usage: spoofcheck [DOMAIN]")
